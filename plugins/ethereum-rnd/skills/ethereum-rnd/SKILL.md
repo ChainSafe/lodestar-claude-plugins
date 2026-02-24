@@ -5,7 +5,7 @@ description: Use when working on Ethereum protocol development, consensus layer,
 
 # Ethereum R&D Reference Lookup
 
-You have access to 15 Ethereum R&D resources. Use WebFetch to retrieve specific content from these sources when answering questions about Ethereum protocol development.
+You have access to 16 Ethereum R&D resources. Use WebFetch to retrieve specific content from these sources when answering questions about Ethereum protocol development.
 
 ## Quick Reference: Which Resource to Use
 
@@ -23,6 +23,7 @@ You have access to 15 Ethereum R&D resources. Use WebFetch to retrieve specific 
 | What are researchers discussing about X? | ethresear.ch |
 | What's the governance status of EIP-NNNN? | ethereum-magicians |
 | What's happening with consensus redesign? | leanroadmap |
+| What's the overall roadmap status? | strawmap |
 | What did R&D Discord say about X? | eth-rnd-archive |
 
 ---
@@ -378,6 +379,21 @@ Tracks Ethereum's consensus layer redesign — forward-looking research and engi
 **Topics:** Gossipsub v2.0, attester-proposer separation, Poseidon hash cryptanalysis
 
 **Note:** This is a JS-rendered SPA — WebFetch may not extract full content. Use WebSearch as fallback for specific lean consensus topics.
+
+---
+
+## 16. strawmap.org — Ethereum Strawman Roadmap Diagram
+
+Visual diagram showing the Ethereum protocol roadmap — feature status, fork assignments, and development tracks.
+
+**Format:** Google-hosted diagram embedded via iframe. This is a visual resource — not machine-readable via WebFetch.
+
+**URL:**
+```
+https://strawmap.org/
+```
+
+**When to use:** When someone asks about the overall Ethereum roadmap, which features are planned for which forks, or the current status of protocol development tracks. Direct the user to the URL since the diagram cannot be fetched programmatically.
 
 ---
 
