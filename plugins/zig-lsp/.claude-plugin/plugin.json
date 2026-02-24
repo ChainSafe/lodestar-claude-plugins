@@ -1,0 +1,4 @@
+{
+  "name": "zig-lsp",
+  "description": "Zig language server (ZLS) for code intelligence"
+}

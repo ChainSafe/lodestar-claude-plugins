@@ -8,5 +8,26 @@
   "metadata": {
     "description": "Plugins for Lodestar Ethereum consensus client development, including tools for beacon chain, validator, and networking workflows"
   },
-  "plugins": []
+  "plugins": [
+    {
+      "name": "zig-lsp",
+      "description": "Zig language server (ZLS) for code intelligence",
+      "version": "1.0.0",
+      "author": {
+        "name": "ChainSafe Systems"
+      },
+      "source": "./plugins/zig-lsp",
+      "category": "development",
+      "strict": false,
+      "lspServers": {
+        "zls": {
+          "command": "zls",
+          "extensionToLanguage": {
+            ".zig": "zig",
+            ".zon": "zig"
+          }
+        }
+      }
+    }
+  ]
 }
