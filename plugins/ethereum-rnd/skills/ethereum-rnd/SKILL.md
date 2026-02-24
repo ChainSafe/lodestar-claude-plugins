@@ -54,12 +54,12 @@ The canonical source for Ethereum's proof-of-stake protocol.
 
 **How to fetch:**
 ```
-https://raw.githubusercontent.com/ethereum/consensus-specs/dev/specs/{fork}/{file}.md
+https://raw.githubusercontent.com/ethereum/consensus-specs/master/specs/{fork}/{file}.md
 ```
 
 Example — fetch the Electra beacon chain spec:
 ```
-WebFetch: https://raw.githubusercontent.com/ethereum/consensus-specs/dev/specs/electra/beacon-chain.md
+WebFetch: https://raw.githubusercontent.com/ethereum/consensus-specs/master/specs/electra/beacon-chain.md
 ```
 
 **Additional content:**
@@ -137,13 +137,13 @@ Python implementation of the execution layer that serves as the formal specifica
 **Structure:** Fork modules from Frontier (2015) through Prague/Osaka (2025+), each containing the full EL state transition logic.
 
 **Key paths:**
-- `src/ethereum/{fork}/` — fork-specific implementation
-- `src/ethereum/{fork}/vm/` — EVM implementation for that fork
+- `src/ethereum/forks/{fork}/` — fork-specific implementation
+- `src/ethereum/forks/{fork}/vm/` — EVM implementation for that fork
 - `tests/` — test suite
 
 **How to fetch:**
 ```
-https://raw.githubusercontent.com/ethereum/execution-specs/master/src/ethereum/{fork}/{file}.py
+https://raw.githubusercontent.com/ethereum/execution-specs/forks/amsterdam/src/ethereum/forks/{fork}/{file}.py
 ```
 
 ---
@@ -227,7 +227,9 @@ https://eips.ethereum.org/EIPS/eip-{number}
 
 Annotated versions of the consensus spec focused on explaining *why* things were designed the way they are, not just *what* they do.
 
-**Coverage:** phase0, altair, bellatrix, capella, deneb (does not cover electra+)
+**Coverage:** phase0, altair, merge (not "bellatrix"), capella, deneb, phase1 (does not cover electra+)
+
+**Note:** The Bellatrix fork is named `merge` in this repo's directory structure.
 
 **How to fetch:**
 ```
@@ -267,7 +269,7 @@ Central coordination hub for Ethereum protocol development.
 
 **How to fetch meeting notes:**
 ```
-https://raw.githubusercontent.com/ethereum/pm/master/AllCoreDevs-CL-Meetings/Call_{number}.md
+https://raw.githubusercontent.com/ethereum/pm/master/AllCoreDevs-CL-Meetings/call_{number}.md
 https://raw.githubusercontent.com/ethereum/pm/master/AllCoreDevs-EL-Meetings/Meeting_{number}.md
 ```
 
@@ -294,7 +296,7 @@ Each message contains: author, category, content, timestamp, attachments.
 1. Identify the likely channel(s) from the list above
 2. Fetch recent daily JSON files from that channel:
 ```
-https://raw.githubusercontent.com/ethereum/eth-rnd-archive/main/{channel}/YYYY-MM-DD.json
+https://raw.githubusercontent.com/ethereum/eth-rnd-archive/master/{channel}/YYYY-MM-DD.json
 ```
 3. Parse the JSON and search message content for relevant keywords
 
@@ -310,14 +312,14 @@ Discourse forum for protocol research. Accessible via WebFetch.
 - Proof-of-Stake, Execution Layer Research, Cryptography
 - Economics, Networking, Privacy, ZK-SNARKs
 
-**How to search:**
+**How to search (use JSON API for reliable results):**
 ```
-WebFetch: https://ethresear.ch/search?q={query}
+WebFetch: https://ethresear.ch/search.json?q={query}
 ```
 
 **How to read a specific post:**
 ```
-WebFetch: https://ethresear.ch/t/{topic-slug}/{topic-id}
+WebFetch: https://ethresear.ch/t/{topic-slug}/{topic-id}.json
 ```
 
 ---
@@ -332,9 +334,9 @@ Discourse forum focused on EIP/ERC governance and protocol coordination.
 - RIPs (18 topics) — rollup improvement proposals
 - Protocol Calls & Happenings — meeting coordination
 
-**How to search:**
+**How to search (use JSON API for reliable results):**
 ```
-WebFetch: https://ethereum-magicians.org/search?q={query}
+WebFetch: https://ethereum-magicians.org/search.json?q={query}
 ```
 
 **When to use:** For understanding the governance status, community sentiment, or discussion history around a specific EIP.
