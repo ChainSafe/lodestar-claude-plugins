@@ -1,0 +1,8 @@
+{
+  "name": "consensus-clients",
+  "description": "Cross-reference Ethereum consensus client implementations — navigate codebases, compare architectures, and track activity across Lodestar, Lighthouse, Prysm, Teku, Nimbus, and Grandine",
+  "version": "1.0.0",
+  "author": {
+    "name": "ChainSafe Systems"
+  }
+}
