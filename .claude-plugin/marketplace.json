@@ -1,0 +1,12 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "lodestar-claude-plugins",
+  "description": "Claude Code plugins for Lodestar Ethereum consensus client development",
+  "owner": {
+    "name": "ChainSafe Systems"
+  },
+  "metadata": {
+    "description": "Plugins for Lodestar Ethereum consensus client development, including tools for beacon chain, validator, and networking workflows"
+  },
+  "plugins": []
+}
