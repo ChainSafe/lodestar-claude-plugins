@@ -7,10 +7,12 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 CONFIG="$SCRIPT_DIR/config.json"
-STATE="$SCRIPT_DIR/state.json"
 
-# Repo path: use ETH_RND_ARCHIVE env var, or default to .eth-rnd-archive in the Lodestar project root
-REPO_PATH="${ETH_RND_ARCHIVE:-${LODESTAR_DIR:-.}/.eth-rnd-archive}"
+# Plugin data lives in the project's .claude/cache directory (not the plugin dir)
+CACHE_DIR="${CLAUDE_CACHE_DIR:-.claude/cache/eth-rnd-archive}"
+mkdir -p "$CACHE_DIR"
+STATE="$CACHE_DIR/state.json"
+REPO_PATH="${ETH_RND_ARCHIVE:-$CACHE_DIR/repo}"
 
 SPECIFIC_DATE="${1:-}"
 
