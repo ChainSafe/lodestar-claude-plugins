@@ -8,8 +8,9 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 CONFIG="$SCRIPT_DIR/config.json"
 
-# Plugin data lives in the project's .claude/cache directory (not the plugin dir)
-CACHE_DIR="${CLAUDE_CACHE_DIR:-.claude/cache/eth-rnd-archive}"
+# Plugin data stored in XDG cache (standard Unix convention for cached data)
+# Falls back to ~/.cache/eth-rnd-archive per XDG Base Directory spec
+CACHE_DIR="${ETH_RND_ARCHIVE_CACHE:-${XDG_CACHE_HOME:-$HOME/.cache}/eth-rnd-archive}"
 mkdir -p "$CACHE_DIR"
 STATE="$CACHE_DIR/state.json"
 REPO_PATH="${ETH_RND_ARCHIVE:-$CACHE_DIR/repo}"
