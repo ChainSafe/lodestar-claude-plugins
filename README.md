@@ -4,17 +4,7 @@ A Claude Code plugin marketplace for [Lodestar](https://github.com/ChainSafe/lod
 
 ## Setup
 
-### 1. Clone reference repos locally (recommended)
-
-For best performance, clone Ethereum spec repos and client codebases locally:
-
-```bash
-bash scripts/clone-repos.sh  # clones to ~/ethereum-repos by default
-```
-
-This enables fast `grep`/`find`/`cat` access instead of slow WebFetch calls. The plugins will fall back to WebFetch if repos aren't cloned.
-
-### 2. Install the marketplace in Claude Code
+### 1. Install the marketplace in Claude Code
 
 ```
 /plugin marketplace add ChainSafe/lodestar-claude-plugins
@@ -28,7 +18,7 @@ Then install individual plugins:
 /plugin install eth-rnd-archive@lodestar-claude-plugins
 ```
 
-### 3. Auto-configure for a project
+### 2. Auto-configure for a project
 
 Add to your project's `.claude/settings.json` to auto-prompt team members:
 
@@ -62,7 +52,6 @@ Add to your project's `.claude/settings.json` to auto-prompt team members:
 ## Structure
 
 - **`/plugins`** - Plugins developed and maintained by the Lodestar team
-- **`/scripts`** - Shared setup scripts (repo cloning, updates)
 - **`/external_plugins`** - Third-party community plugins
 
 ## Contributing
