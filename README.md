@@ -2,23 +2,67 @@
 
 A Claude Code plugin marketplace for [Lodestar](https://github.com/ChainSafe/lodestar) and Ethereum consensus client development.
 
-## Installation
+## Setup
 
-Add this marketplace to Claude Code:
+### 1. Clone reference repos locally (recommended)
+
+For best performance, clone Ethereum spec repos and client codebases locally:
+
+```bash
+bash scripts/clone-repos.sh  # clones to ~/ethereum-repos by default
+```
+
+This enables fast `grep`/`find`/`cat` access instead of slow WebFetch calls. The plugins will fall back to WebFetch if repos aren't cloned.
+
+### 2. Install the marketplace in Claude Code
 
 ```
-/plugin marketplace add <owner>/<repo>
+/plugin marketplace add ChainSafe/lodestar-claude-plugins
 ```
 
 Then install individual plugins:
 
 ```
-/plugin install <plugin-name>@lodestar-claude-plugins
+/plugin install ethereum-rnd@lodestar-claude-plugins
+/plugin install consensus-clients@lodestar-claude-plugins
+/plugin install eth-rnd-archive@lodestar-claude-plugins
 ```
+
+### 3. Auto-configure for a project
+
+Add to your project's `.claude/settings.json` to auto-prompt team members:
+
+```json
+{
+  "enabledPlugins": {
+    "ethereum-rnd@lodestar-claude-plugins": true,
+    "consensus-clients@lodestar-claude-plugins": true,
+    "eth-rnd-archive@lodestar-claude-plugins": true
+  },
+  "extraKnownMarketplaces": {
+    "lodestar-claude-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "ChainSafe/lodestar-claude-plugins"
+      }
+    }
+  }
+}
+```
+
+## Plugins
+
+| Plugin | Description |
+|--------|-------------|
+| **ethereum-rnd** | Ethereum R&D reference lookup — consensus specs, beacon/execution APIs, EIPs, research forums, protocol governance |
+| **consensus-clients** | Cross-reference CL client implementations — navigate codebases, compare architectures across 6 clients |
+| **eth-rnd-archive** | Search the Ethereum R&D Discord Archive — find protocol discussions across 115+ channels |
+| **zig-lsp** | Zig language server (ZLS) for code intelligence |
 
 ## Structure
 
 - **`/plugins`** - Plugins developed and maintained by the Lodestar team
+- **`/scripts`** - Shared setup scripts (repo cloning, updates)
 - **`/external_plugins`** - Third-party community plugins
 
 ## Contributing

@@ -7,25 +7,15 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 CONFIG="$SCRIPT_DIR/config.json"
+STATE="$SCRIPT_DIR/state.json"
 
-# Plugin data stored in XDG cache (standard Unix convention for cached data)
-# Falls back to ~/.cache/eth-rnd-archive per XDG Base Directory spec
-CACHE_DIR="${ETH_RND_ARCHIVE_CACHE:-${XDG_CACHE_HOME:-$HOME/.cache}/eth-rnd-archive}"
-mkdir -p "$CACHE_DIR"
-STATE="$CACHE_DIR/state.json"
-REPO_PATH="${ETH_RND_ARCHIVE:-$CACHE_DIR/repo}"
-
+# Read repo path from config, expand ~
+REPO_PATH=$(python3 -c "import json, os; print(os.path.expanduser(json.load(open('$CONFIG')).get('repoPath', '~/ethereum-repos/eth-rnd-archive')))")
 SPECIFIC_DATE="${1:-}"
 
-if [ ! -d "$REPO_PATH" ]; then
-    echo "Error: Archive repo not found at $REPO_PATH" >&2
-    echo "Run: git clone https://github.com/ethereum/eth-rnd-archive.git $REPO_PATH" >&2
-    exit 1
-fi
-
-# Initialize state file if needed
+# Initialize state file if missing
 if [ ! -f "$STATE" ]; then
-    echo '{"lastCommit": "", "lastCheck": ""}' > "$STATE"
+  echo '{"lastCommit": "", "lastCheck": ""}' > "$STATE"
 fi
 
 # Read tracked channels from config
@@ -52,29 +42,15 @@ if [ -n "$SPECIFIC_DATE" ]; then
             MSG_COUNT=$(python3 -c "import json; print(len(json.load(open('$FILE'))))")
             echo -n "    \"$channel\": {\"file\": \"$FILE\", \"messages\": $MSG_COUNT}"
         fi
-        # Also check threads
-        THREAD_DIR="$REPO_PATH/$channel/_threads"
-        if [ -d "$THREAD_DIR" ]; then
-            find "$THREAD_DIR" -name "$SPECIFIC_DATE.json" 2>/dev/null | while read -r tfile; do
-                THREAD_NAME=$(basename "$(dirname "$tfile")")
-                if [ "$FIRST" = true ]; then FIRST=false; else echo ","; fi
-                TMSG_COUNT=$(python3 -c "import json; print(len(json.load(open('$tfile'))))")
-                echo -n "    \"$channel/_threads/$THREAD_NAME\": {\"file\": \"$tfile\", \"messages\": $TMSG_COUNT}"
-            done
-        fi
     done <<< "$CHANNELS"
     echo ""
     echo "  },"
     echo "  \"commit\": \"$CURRENT_COMMIT\""
     echo "}"
 elif [ -z "$LAST_COMMIT" ] || [ "$LAST_COMMIT" = "$CURRENT_COMMIT" ]; then
-    # First run or no changes
-    TODAY=$(date -u +%Y-%m-%d)
     echo "{"
-    echo "  \"mode\": \"initial-or-no-change\","
-    echo "  \"date\": \"$TODAY\","
-    echo "  \"commit\": \"$CURRENT_COMMIT\","
-    echo "  \"changed_files\": []"
+    echo "  \"mode\": \"no-changes\","
+    echo "  \"commit\": \"$CURRENT_COMMIT\""
     echo "}"
 else
     # Diff mode — find changed files since last commit
@@ -87,9 +63,7 @@ else
     echo "  \"tracked_changes\": ["
     FIRST=true
     while IFS= read -r file; do
-        # Extract channel name (first path component)
         CHANNEL=$(echo "$file" | cut -d'/' -f1)
-        # Check if this channel is tracked (also match _threads subdirs)
         if echo "$CHANNELS" | grep -qx "$CHANNEL"; then
             if [[ "$file" == *.json ]] && [ -f "$REPO_PATH/$file" ]; then
                 if [ "$FIRST" = true ]; then FIRST=false; else echo ","; fi

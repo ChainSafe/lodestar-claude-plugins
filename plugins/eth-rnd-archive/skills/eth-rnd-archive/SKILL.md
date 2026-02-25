@@ -1,32 +1,108 @@
 ---
 name: eth-rnd-archive
-description: Search and track discussions from the Ethereum R&D Discord Archive. Use when looking for protocol discussions, researching what was said about a specific topic, tracking channel activity, or finding context for protocol decisions. Covers 115+ channels including consensus-dev, execution-dev, ePBS, PeerDAS, networking, and more.
+description: Search the Ethereum R&D Discord Archive for protocol discussions. Use when looking up what was discussed about a specific topic (ePBS, PeerDAS, inclusion lists, etc.), finding decisions made in Eth R&D Discord, or tracking research conversations. Requires a local clone of ethereum/eth-rnd-archive.
 ---
 
-# Eth R&D Archive Search & Tracker
+# Eth R&D Discord Archive Search
 
-Search and track discussions from the [Ethereum R&D Discord Archive](https://github.com/ethereum/eth-rnd-archive) — a machine-readable archive of all Eth R&D Discord channels, updated weekly by EF DevOps.
+Search through the [Ethereum R&D Discord Archive](https://github.com/ethereum/eth-rnd-archive) — a machine-readable archive of all discussions in the Eth R&D Discord server. Updated weekly by EF DevOps.
 
 ## Setup
 
+Clone the archive repo locally (included in `scripts/clone-repos.sh`):
+
 ```bash
-# Clone the archive (613MB, one-time)
-git clone https://github.com/ethereum/eth-rnd-archive.git ~/eth-rnd-archive
+git clone --depth 1 https://github.com/ethereum/eth-rnd-archive.git ~/ethereum-repos/eth-rnd-archive
 ```
 
-## Archive Structure
+## Searching the Archive
 
-Each channel is a directory with daily JSON files:
-```
-channel-name/
-├── 2026-02-20.json
-├── 2026-02-21.json
-├── _threads/
-│   └── thread-name/
-│       └── 2026-02-21.json
+The archive contains daily JSON files per channel: `{channel}/YYYY-MM-DD.json`
+
+### Search by topic across all channels
+
+```bash
+# Find discussions about a topic
+grep -rl "PeerDAS" ~/ethereum-repos/eth-rnd-archive/ --include="*.json" | head -20
+
+# Search with context (shows the actual message content)
+grep -r "inclusion list" ~/ethereum-repos/eth-rnd-archive/consensus-dev/ --include="*.json" -l
+
+# Read messages from a specific channel and date
+cat ~/ethereum-repos/eth-rnd-archive/epbs/2026-02-20.json | python3 -m json.tool
 ```
 
-### Message Format
+### Search a specific channel
+
+```bash
+# Recent messages in a channel
+ls -t ~/ethereum-repos/eth-rnd-archive/consensus-dev/*.json | head -5 | xargs cat | python3 -c "
+import json, sys
+for line in sys.stdin:
+    try:
+        msgs = json.loads(line)
+        for m in msgs:
+            print(f\"[{m['created_at'][:10]}] {m['author']}: {m['content'][:200]}\")
+    except: pass
+"
+```
+
+### Search threads
+
+Threads are stored in `_threads/` subdirectories:
+
+```bash
+# List all threads in a channel
+ls ~/ethereum-repos/eth-rnd-archive/epbs/_threads/
+
+# Search within threads
+grep -r "keyword" ~/ethereum-repos/eth-rnd-archive/epbs/_threads/ --include="*.json"
+```
+
+## Key Channels
+
+### Core Protocol Development
+| Channel | Topics |
+|---------|--------|
+| `consensus-dev` | CL protocol development, client coordination |
+| `execution-dev` | EL protocol development |
+| `allcoredevs` | Cross-layer coordination, ACD call follow-ups |
+| `specifications` | Formal spec discussions |
+| `apis` | Beacon/Engine API design |
+| `client-development` | Client team discussions |
+
+### Active Research Areas
+| Channel | Topics |
+|---------|--------|
+| `epbs` | Enshrined proposer-builder separation |
+| `inclusion-lists` | Inclusion list design (FOCIL, etc.) |
+| `shorter-slot-times` | Slot time reduction research |
+| `data-availability-sampling` | DAS / PeerDAS design |
+| `l1-zkevm` | CK EVM / L1 zkEVM |
+| `l1-zkevm-protocol` | CK EVM protocol details |
+
+### Networking & Testing
+| Channel | Topics |
+|---------|--------|
+| `networking` | General networking protocol discussions |
+| `libp2p` | libp2p protocol development |
+| `peerdas-testing` | PeerDAS test coordination |
+| `peerdas-devnet-alerts` | PeerDAS devnet status/alerts |
+
+### Other Notable Channels
+| Channel | Topics |
+|---------|--------|
+| `cryptography` | Crypto primitives, hash functions |
+| `formal-methods` | Formal verification |
+| `post-quantum` | Post-quantum cryptography |
+| `beacon-network` | Beacon chain networking |
+| `portal-network` | Portal network protocol |
+| `account-abstraction` | AA design |
+| `light-clients` | Light client protocol |
+
+## Message Format
+
+Each JSON file contains an array of messages:
 
 ```json
 {
@@ -39,128 +115,34 @@ channel-name/
 }
 ```
 
-## Key Channels
+## Tracking Updates
 
-### Core Protocol Development
-| Channel | Topics |
-|---------|--------|
-| `consensus-dev` | CL protocol development, client team discussions |
-| `execution-dev` | EL protocol development |
-| `allcoredevs` | Cross-client coordination, ACD call follow-ups |
-| `specifications` | Spec discussions, clarifications |
-| `client-development` | General client engineering |
-| `apis` | Beacon/Engine API design |
-
-### Active Research Areas
-| Channel | Topics |
-|---------|--------|
-| `epbs` | Enshrined proposer-builder separation design |
-| `inclusion-lists` | FOCIL, inclusion list mechanisms |
-| `data-availability-sampling` | DAS / PeerDAS protocol |
-| `shorter-slot-times` | Slot time reduction research |
-| `l1-zkevm` | CK EVM / L1 zkEVM |
-| `l1-zkevm-protocol` | CK EVM protocol details (EIP-8025) |
-
-### Networking & Testing
-| Channel | Topics |
-|---------|--------|
-| `networking` | General networking protocol |
-| `libp2p` | libp2p protocol discussions |
-| `peerdas-testing` | PeerDAS test coordination |
-| `peerdas-devnet-alerts` | PeerDAS devnet status/issues |
-
-### Other Notable Channels
-| Channel | Topics |
-|---------|--------|
-| `cryptography` | Cryptographic primitives, BLS, KZG |
-| `formal-methods` | Formal verification |
-| `post-quantum` | Post-quantum cryptography |
-| `beacon-network` | Beacon chain networking |
-| `portal-network` | Portal network protocol |
-| `account-abstraction` | AA / ERC-4337 |
-| `light-clients` | Light client protocol |
-| `ai-workflows` | AI tooling for Ethereum development |
-
-## How to Search
-
-### Search a specific channel for a topic
+Use the provided script to check for new messages in configured channels:
 
 ```bash
-# Search recent messages in a channel
-cd ~/eth-rnd-archive
-grep -rl "topic" consensus-dev/ | sort | tail -5
-
-# Read messages from a specific date
-cat consensus-dev/2026-02-21.json | python3 -c "
-import json, sys
-for msg in json.load(sys.stdin):
-    if 'keyword' in msg['content'].lower():
-        print(f\"[{msg['created_at']}] {msg['author']}: {msg['content'][:200]}\")
-"
-```
-
-### Fetch via raw GitHub URLs (without cloning)
-
-```
-https://raw.githubusercontent.com/ethereum/eth-rnd-archive/master/{channel}/YYYY-MM-DD.json
-```
-
-Example — fetch yesterday's consensus-dev messages:
-```bash
-curl -s "https://raw.githubusercontent.com/ethereum/eth-rnd-archive/master/consensus-dev/$(date -u -d yesterday +%Y-%m-%d).json" | python3 -c "
-import json, sys
-msgs = json.load(sys.stdin)
-print(f'{len(msgs)} messages')
-for msg in msgs:
-    print(f\"[{msg['author']}] {msg['content'][:150]}\")
-"
-```
-
-### Search threads
-
-Threads are stored in `_threads/` subdirectories:
-```bash
-# Find threads about a topic
-find ~/eth-rnd-archive/epbs/_threads -name "*.json" | head -20
-
-# Read a specific thread
-cat "~/eth-rnd-archive/epbs/_threads/make it two clients/2026-02-23.json"
-```
-
-## Tracking Changes (Automated)
-
-Use the included `check-updates.sh` script to track new messages:
-
-```bash
-# Check for new messages across tracked channels
-bash scripts/check-updates.sh
-
-# Check a specific date
-bash scripts/check-updates.sh 2026-02-25
+bash scripts/check-updates.sh [specific-date]
 ```
 
 The script:
 1. Pulls latest changes from the archive repo
-2. Diffs against the last-checked commit (stored in `state.json`)
+2. Compares against the last-checked commit (stored in `scripts/state.json`)
 3. Outputs new/modified files from tracked channels as JSON
-4. Updates the state file
 
 ### Configuration
 
-Edit `scripts/config.json` to customize tracked channels:
+Edit `scripts/config.json` to configure which channels to track:
 
 ```json
 {
   "channels": ["epbs", "consensus-dev", "allcoredevs", ...],
-  "checkIntervalMinutes": 60,
-  "repoPath": "~/eth-rnd-archive"
+  "repoPath": "~/ethereum-repos/eth-rnd-archive"
 }
 ```
 
 ## Tips
 
-- **Start with the most relevant channel.** For broad protocol questions try `consensus-dev` or `execution-dev`. For specific features, use the dedicated channel.
-- **Check threads.** Important discussions often happen in threads, not top-level messages.
-- **Date-based access is fast.** If you know roughly when something was discussed, go straight to that date's file.
-- **Archive updates weekly.** Don't expect real-time messages — there's typically a few days of lag.
-- **Combine with ethereum-rnd plugin.** Use ethereum-rnd for spec/API reference, this plugin for discussion context.
+- **Start with the right channel.** Use the channel table above to narrow your search before grepping the whole archive.
+- **Date-based browsing** is useful for finding what was discussed around specific events (ACD calls, devnet launches).
+- **Thread names** often describe the topic — `ls _threads/` gives a quick overview of discussion threads.
+- **Authors matter** — filter by known contributors (e.g., `grep -r '"author": "vbuterin"'`) for high-signal content.
+- **Keep the clone updated** — `git -C ~/ethereum-repos/eth-rnd-archive pull` before searching for recent discussions.

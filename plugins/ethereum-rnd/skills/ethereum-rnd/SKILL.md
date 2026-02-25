@@ -5,7 +5,45 @@ description: Use when working on Ethereum protocol development, consensus layer,
 
 # Ethereum R&D Reference Lookup
 
-You have access to 17 Ethereum R&D resources. Use WebFetch to retrieve specific content from these sources when answering questions about Ethereum protocol development.
+You have access to 17 Ethereum R&D resources for answering questions about Ethereum protocol development.
+
+## Local Clone Strategy (Preferred)
+
+**Clone repos locally for fast, reliable access.** Run the setup script from the plugin repo:
+
+```bash
+bash scripts/clone-repos.sh [base-dir]  # default: ~/ethereum-repos
+```
+
+Once cloned, use `grep`, `find`, and `cat` to search and read content directly:
+
+```bash
+# Search consensus specs for a function
+grep -r "process_attestation" ~/ethereum-repos/consensus-specs/specs/ --include="*.md"
+
+# Read a specific spec file
+cat ~/ethereum-repos/consensus-specs/specs/electra/beacon-chain.md
+
+# Find all EIPs mentioning a topic
+grep -rl "blob" ~/ethereum-repos/EIPs/EIPS/ | head -20
+
+# Search beacon API endpoints
+grep -r "post_beacon_blocks" ~/ethereum-repos/beacon-APIs/apis/
+
+# Find where a function is defined across client repos
+grep -rn "processAttestation\|process_attestation" ~/ethereum-repos/lodestar/packages/ ~/ethereum-repos/lighthouse/consensus/ --include="*.ts" --include="*.rs"
+```
+
+**Why local clones are better than WebFetch:**
+- Instant access (no network latency)
+- Can use grep/find for powerful cross-file search
+- Works offline
+- No rate limits or URL guessing
+- Can diff between versions
+
+**Keep repos updated:** Re-run `clone-repos.sh` periodically (it does `git pull` on existing clones).
+
+**Fallback:** If repos aren't cloned locally, use WebFetch with the raw GitHub URLs documented below for each resource.
 
 ## Quick Reference: Which Resource to Use
 
@@ -459,9 +497,10 @@ Dark boxes denote headliners, grey boxes indicate offchain upgrades, black boxes
 
 ## General Tips
 
-1. **Always prefer raw GitHub URLs** for fetching spec content — they return clean markdown/YAML
+1. **Prefer local clones over WebFetch** — use `grep`/`cat` on cloned repos (see "Local Clone Strategy" at the top). Fall back to raw GitHub URLs only if repos aren't cloned.
 2. **For OpenAPI specs** (beacon-APIs, builder-specs), fetch the rendered docs site for human-readable format or the raw YAML for structured data
 3. **For "why" questions**, check annotated-spec and eth2book before the raw specs
 4. **For recent protocol decisions**, check pm meeting notes and ethresear.ch
 5. **For implementation details**, the consensus-specs Python code is executable and testable — it's not just documentation
 6. **Fork order matters** — each fork builds on the previous. Start with the latest relevant fork and reference earlier ones for context
+7. **Cross-file search is powerful** — `grep -r "term" ~/ethereum-repos/consensus-specs/specs/` finds all references instantly, much faster than fetching individual files
