@@ -382,18 +382,45 @@ Tracks Ethereum's consensus layer redesign — forward-looking research and engi
 
 ---
 
-## 16. strawmap.org — Ethereum Strawman Roadmap Diagram
+## 16. strawmap.org — L1 Strawmap: Ethereum Draft Roadmap
 
-Visual diagram showing the Ethereum protocol roadmap — feature status, fork assignments, and development tracks.
+The official EF Protocol draft roadmap for Ethereum L1, maintained by the EF Architecture team (Ansgar, Barnabé, Francesco, Justin Drake). A living document updated at least quarterly.
 
-**Format:** Google-hosted diagram embedded via iframe. This is a visual resource — not machine-readable via WebFetch.
+**Format:** Google Drawings diagram embedded via iframe. Requires Google sign-in to view. Not machine-readable via WebFetch — use the sidebar FAQ and info below as reference.
 
 **URL:**
 ```
 https://strawmap.org/
 ```
 
-**When to use:** When someone asks about the overall Ethereum roadmap, which features are planned for which forks, or the current status of protocol development tracks. Direct the user to the URL since the diagram cannot be fetched programmatically.
+**Google Drawings source (requires auth):**
+```
+https://docs.google.com/drawings/d/1GkcGfQv9kxgrYQMyu0BYGcZya0gIDG_wQ7GsFJEsdzY/edit?usp=sharing
+```
+
+**Structure:** The diagram is a timeline of forks progressing left to right, organized into three color-coded horizontal layers:
+- **Consensus Layer (CL)** — consensus protocol upgrades
+- **Data Layer (DL)** — data availability upgrades
+- **Execution Layer (EL)** — execution engine upgrades
+
+Dark boxes denote headliners, grey boxes indicate offchain upgrades, black boxes represent north stars. Arrows signal hard technical dependencies or natural fork progressions.
+
+**Fork naming:** CL forks follow a star-based scheme with incrementing first letters: Altair, Bellatrix, Capella, Deneb, Electra, Fulu, Glamsterdam, Hegotá, I*, J* (I*/J* are placeholders, I* pronounced "I star").
+
+**Time horizon:** ~7 forks through end of decade (~one fork every 6 months). Well beyond ACD's typical next-two-forks focus.
+
+**Five north stars (long-term goals):**
+1. **fast L1** — transaction inclusion and chain finality in seconds
+2. **gigagas L1** — 1 gigagas/sec (10K TPS) at L1 via zkEVMs and real-time proving
+3. **teragas L2** — 1 GB/sec (10M TPS) at L2 via data availability sampling
+4. **post-quantum L1** — century-scale cryptographic security via hash-based schemes
+5. **private L1** — privacy as first-class citizen via L1 shielded transfers
+
+**Headliners:** Each fork typically has one CL and one EL headliner (e.g. Glamsterdam: ePBS + BALs).
+
+**Contact:** strawmap@ethereum.org or the maintainers on X (@adietrichs, @barnabemonnot, @fradamt, @drakefjustin).
+
+**When to use:** When someone asks about the overall Ethereum roadmap, which features are planned for which forks, north star goals, or the multi-year direction of L1 development. Direct the user to strawmap.org since the diagram requires Google auth.
 
 ---
 
