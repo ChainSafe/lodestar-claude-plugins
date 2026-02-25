@@ -9,9 +9,8 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 CONFIG="$SCRIPT_DIR/config.json"
 STATE="$SCRIPT_DIR/state.json"
 
-# Read repo path from config, default to ~/eth-rnd-archive
-REPO_PATH=$(python3 -c "import json; print(json.load(open('$CONFIG')).get('repoPath', '$HOME/eth-rnd-archive'))" 2>/dev/null || echo "$HOME/eth-rnd-archive")
-REPO_PATH="${REPO_PATH/#\~/$HOME}"
+# Repo path: use ETH_RND_ARCHIVE env var, or default to .eth-rnd-archive in the Lodestar project root
+REPO_PATH="${ETH_RND_ARCHIVE:-${LODESTAR_DIR:-.}/.eth-rnd-archive}"
 
 SPECIFIC_DATE="${1:-}"
 

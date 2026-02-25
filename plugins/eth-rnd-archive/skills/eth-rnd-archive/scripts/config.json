@@ -11,13 +11,9 @@
     "l1-zkevm-protocol",
     "data-availability-sampling",
     "networking",
-    "libp2p",
-    "peerdas-testing",
-    "peerdas-devnet-alerts",
     "client-development",
     "execution-dev",
     "ai-workflows"
   ],
-  "checkIntervalMinutes": 60,
-  "repoPath": "~/eth-rnd-archive"
+  "checkIntervalMinutes": 60
 }
