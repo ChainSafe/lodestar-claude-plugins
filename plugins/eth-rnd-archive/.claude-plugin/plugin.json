@@ -1,6 +1,6 @@
 {
   "name": "eth-rnd-archive",
-  "description": "Search and track the Ethereum R&D Discord Archive — find protocol discussions, track channel activity, and surface research conversations across 115+ channels.",
+  "description": "Search and track the Ethereum R&D Discord Archive — find protocol discussions across 115+ channels with local clone and grep.",
   "version": "1.0.0",
   "author": {
     "name": "ChainSafe Systems"

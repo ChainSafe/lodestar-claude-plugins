@@ -7,6 +7,43 @@ description: Use when comparing Ethereum consensus client implementations, looki
 
 You have detailed maps of all 6 Ethereum consensus clients. Use this to find implementations, compare approaches, and track activity.
 
+## Local Clone Strategy (Preferred)
+
+**Clone client repos locally for fast code navigation.** Run the setup script from the plugin repo:
+
+```bash
+bash scripts/clone-repos.sh [base-dir]  # default: ~/ethereum-repos
+```
+
+Once cloned, use `grep`, `find`, and `cat` to navigate codebases directly:
+
+```bash
+# Find how each client implements a spec function
+grep -rn "process_attestation\|processAttestation\|ProcessAttestation" \
+  ~/ethereum-repos/lodestar/packages/ \
+  ~/ethereum-repos/lighthouse/consensus/ \
+  ~/ethereum-repos/prysm/beacon-chain/core/ \
+  ~/ethereum-repos/teku/ethereum/spec/ \
+  ~/ethereum-repos/nimbus-eth2/beacon_chain/spec/ \
+  ~/ethereum-repos/grandine/transition_functions/ \
+  --include="*.ts" --include="*.rs" --include="*.go" --include="*.java" --include="*.nim"
+
+# Compare fork choice implementations
+find ~/ethereum-repos/*/  -path "*/fork*choice*" -name "*.ts" -o -name "*.rs" -o -name "*.go" | head -20
+
+# Search for a specific type across all clients
+grep -rn "ExecutionPayloadEnvelope" ~/ethereum-repos/{lodestar,lighthouse,prysm,teku,nimbus-eth2,grandine}/ \
+  --include="*.ts" --include="*.rs" --include="*.go" --include="*.java" --include="*.nim" | head -30
+```
+
+**Why local clones are better than WebFetch:**
+- Cross-client grep finds implementations in seconds
+- No URL guessing or 404s on wrong file paths
+- Can search across all clients simultaneously
+- Works offline, no rate limits
+
+**Fallback:** If repos aren't cloned locally, use WebFetch with the raw GitHub URLs listed for each client below.
+
 ## Client Overview
 
 | Client | Language | Repo | Build | Branch strategy |
@@ -401,9 +438,14 @@ gh search issues "keyword" --repo ChainSafe/lodestar
 ```
 
 **Compare how clients implemented a specific feature:**
-1. Search PRs across all clients for the feature name or EIP number
-2. Read the PR descriptions and key changed files
-3. Fetch the actual implementation files using raw GitHub URLs above
+1. If repos are cloned locally, grep across all clients simultaneously:
+   ```bash
+   grep -rn "feature_keyword" ~/ethereum-repos/{lodestar,lighthouse,prysm,teku,nimbus-eth2,grandine}/ \
+     --include="*.ts" --include="*.rs" --include="*.go" --include="*.java" --include="*.nim" | head -30
+   ```
+2. Search PRs across all clients for the feature name or EIP number
+3. Read the PR descriptions and key changed files
+4. If not cloned, fetch the actual implementation files using raw GitHub URLs above
 
 ---
 
