@@ -68,6 +68,16 @@
       },
       "source": "./plugins/release-notes",
       "category": "development"
+    },
+    {
+      "name": "local-mainnet-debug",
+      "description": "Debug Lodestar beacon node issues by running against mainnet with checkpoint sync and engineMock — peer discovery, identify failures, metrics analysis, A/B testing",
+      "version": "1.0.0",
+      "author": {
+        "name": "ChainSafe Systems"
+      },
+      "source": "./plugins/local-mainnet-debug",
+      "category": "development"
     }
   ]
 }
