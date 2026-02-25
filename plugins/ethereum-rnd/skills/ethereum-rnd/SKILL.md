@@ -5,7 +5,7 @@ description: Use when working on Ethereum protocol development, consensus layer,
 
 # Ethereum R&D Reference Lookup
 
-You have access to 16 Ethereum R&D resources. Use WebFetch to retrieve specific content from these sources when answering questions about Ethereum protocol development.
+You have access to 17 Ethereum R&D resources. Use WebFetch to retrieve specific content from these sources when answering questions about Ethereum protocol development.
 
 ## Quick Reference: Which Resource to Use
 
@@ -19,7 +19,7 @@ You have access to 16 Ethereum R&D resources. Use WebFetch to retrieve specific 
 | How does peer discovery/networking work? | devp2p |
 | What does EIP-NNNN specify? | EIPs |
 | Why was X designed this way? | annotated-spec, eth2book |
-| What did ACD decide about X? | pm |
+| What did ACD decide about X? | pm, forkcast |
 | What are researchers discussing about X? | ethresear.ch |
 | What's the governance status of EIP-NNNN? | ethereum-magicians |
 | What's happening with consensus redesign? | leanroadmap |
@@ -276,7 +276,40 @@ https://raw.githubusercontent.com/ethereum/pm/master/AllCoreDevs-EL-Meetings/Mee
 
 ---
 
-## 11. ethereum/eth-rnd-archive — Eth R&D Discord Archive
+## 11. forkcast.org — Protocol Call Tracker
+
+Comprehensive tracker for all Ethereum protocol development calls. JS-rendered SPA — requires Playwright MCP for full access, but URL patterns are predictable.
+
+**Call series tracked:**
+- **ACDC** — All Core Devs Consensus (consensus layer)
+- **ACDE** — All Core Devs Execution (execution layer)
+- **ACDT** — All Core Devs Testing
+- **Breakouts** — FOCIL, EPBS, BAL, RPC, PQTS, PRICE, TLI, ZKEVM, ETM, AWD
+
+**Per-call detail includes:**
+- Embedded YouTube recording with timestamps
+- Full timestamped transcript with speaker labels
+- AI-generated summary (highlights + action items)
+- Link to agenda (GitHub pm issue)
+
+**Also tracks network events:** Pectra/Fusaka devnet launches, testnet activations, mainnet upgrades, blob parameter changes (BPO1/BPO2).
+
+**URL patterns:**
+```
+https://forkcast.org/calls                          — full call list + calendar
+https://forkcast.org/calls/acdc/{number}            — specific ACDC call
+https://forkcast.org/calls/acde/{number}            — specific ACDE call
+https://forkcast.org/calls/acdt/{number}            — specific ACDT call
+https://forkcast.org/calls/{breakout}/{number}      — specific breakout call (focil, epbs, bal, etc.)
+```
+
+**How to use:** Navigate with Playwright MCP to get transcripts and summaries. For the call list, the page loads without JS issues. Individual call pages need a brief wait for transcript data to load.
+
+**When to use:** When someone asks what was discussed or decided in a specific ACD call, or wants to find the most recent call for a topic. Prefer forkcast over raw pm meeting notes — it has richer content (transcripts, summaries, YouTube links).
+
+---
+
+## 12. ethereum/eth-rnd-archive — Eth R&D Discord Archive
 
 Machine-readable archive of all discussions in the Eth R&D Discord server. Updated weekly.
 
@@ -305,7 +338,7 @@ https://raw.githubusercontent.com/ethereum/eth-rnd-archive/master/{channel}/YYYY
 
 ---
 
-## 12. ethresear.ch — Ethereum Research Forum
+## 13. ethresear.ch — Ethereum Research Forum
 
 Discourse forum for protocol research. Accessible via WebFetch.
 
@@ -325,7 +358,7 @@ WebFetch: https://ethresear.ch/t/{topic-slug}/{topic-id}.json
 
 ---
 
-## 13. ethereum-magicians.org — EIP Governance Forum
+## 14. ethereum-magicians.org — EIP Governance Forum
 
 Discourse forum focused on EIP/ERC governance and protocol coordination.
 
@@ -344,7 +377,7 @@ WebFetch: https://ethereum-magicians.org/search.json?q={query}
 
 ---
 
-## 14. eth2book.info — "Upgrading Ethereum" by Ben Edgington
+## 15. eth2book.info — "Upgrading Ethereum" by Ben Edgington
 
 Comprehensive technical reference book on Ethereum's proof-of-stake transition.
 
@@ -366,7 +399,7 @@ WebFetch: https://eth2book.info/latest/part3/transition/{topic}/
 
 ---
 
-## 15. leanroadmap.org — Lean Consensus Roadmap
+## 16. leanroadmap.org — Lean Consensus Roadmap
 
 Tracks Ethereum's consensus layer redesign — forward-looking research and engineering.
 
@@ -382,7 +415,7 @@ Tracks Ethereum's consensus layer redesign — forward-looking research and engi
 
 ---
 
-## 16. strawmap.org — L1 Strawmap: Ethereum Draft Roadmap
+## 17. strawmap.org — L1 Strawmap: Ethereum Draft Roadmap
 
 The official EF Protocol draft roadmap for Ethereum L1, maintained by the EF Architecture team (Ansgar, Barnabé, Francesco, Justin Drake). A living document updated at least quarterly.
 
