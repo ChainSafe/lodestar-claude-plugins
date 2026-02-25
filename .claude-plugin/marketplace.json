@@ -48,6 +48,16 @@
       },
       "source": "./plugins/consensus-clients",
       "category": "development"
+    },
+    {
+      "name": "eth-rnd-archive",
+      "description": "Search and track the Ethereum R&D Discord Archive — find protocol discussions, track channel activity, and surface research conversations across 115+ channels",
+      "version": "1.0.0",
+      "author": {
+        "name": "ChainSafe Systems"
+      },
+      "source": "./plugins/eth-rnd-archive",
+      "category": "development"
     }
   ]
 }

@@ -1,0 +1,19 @@
+{
+  "channels": [
+    "epbs",
+    "consensus-dev",
+    "allcoredevs",
+    "apis",
+    "specifications",
+    "inclusion-lists",
+    "shorter-slot-times",
+    "l1-zkevm",
+    "l1-zkevm-protocol",
+    "data-availability-sampling",
+    "networking",
+    "client-development",
+    "execution-dev",
+    "ai-workflows"
+  ],
+  "checkIntervalMinutes": 60
+}
