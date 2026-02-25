@@ -1,0 +1,8 @@
+{
+  "name": "kurtosis-devnet",
+  "description": "Run Ethereum multi-client devnets using Kurtosis and ethereum-package. Covers setup, debugging, fork transitions, assertoor testing, and monitoring for consensus/execution client interop validation.",
+  "version": "1.0.0",
+  "author": {
+    "name": "ChainSafe Systems"
+  }
+}

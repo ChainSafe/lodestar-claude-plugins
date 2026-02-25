@@ -48,6 +48,26 @@
       },
       "source": "./plugins/consensus-clients",
       "category": "development"
+    },
+    {
+      "name": "kurtosis-devnet",
+      "description": "Run Ethereum multi-client devnets using Kurtosis and ethereum-package — setup, debugging, fork transitions, assertoor testing, and monitoring for CL/EL interop validation",
+      "version": "1.0.0",
+      "author": {
+        "name": "ChainSafe Systems"
+      },
+      "source": "./plugins/kurtosis-devnet",
+      "category": "development"
+    },
+    {
+      "name": "release-notes",
+      "description": "Write Lodestar release notes and Discord announcements — changelog analysis, operator-facing highlights, GitHub release headers, and Discord formatting",
+      "version": "1.0.0",
+      "author": {
+        "name": "ChainSafe Systems"
+      },
+      "source": "./plugins/release-notes",
+      "category": "development"
     }
   ]
 }

@@ -1,0 +1,8 @@
+{
+  "name": "release-notes",
+  "description": "Write Lodestar release notes and Discord announcements. Covers changelog analysis, operator-facing highlights, and formatting for both GitHub releases and Discord channels.",
+  "version": "1.0.0",
+  "author": {
+    "name": "ChainSafe Systems"
+  }
+}
