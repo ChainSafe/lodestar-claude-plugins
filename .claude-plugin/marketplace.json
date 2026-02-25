@@ -48,16 +48,6 @@
       },
       "source": "./plugins/consensus-clients",
       "category": "development"
-    },
-    {
-      "name": "playwright-mcp",
-      "description": "Browser automation via Playwright MCP — navigate JS-rendered pages, interact with web apps, and extract content from dynamic sites",
-      "version": "1.0.0",
-      "author": {
-        "name": "ChainSafe Systems"
-      },
-      "source": "./plugins/playwright-mcp",
-      "category": "development"
     }
   ]
 }
