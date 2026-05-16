@@ -1,0 +1,27 @@
+{
+  "name": "eth-rnd-archive",
+  "version": "1.0.0",
+  "description": "Search and track the Ethereum R&D Discord Archive - find protocol discussions across 115+ channels with local clone and grep.",
+  "author": {
+    "name": "ChainSafe Systems"
+  },
+  "homepage": "https://github.com/ChainSafe/lodestar-claude-plugins",
+  "repository": "https://github.com/ChainSafe/lodestar-claude-plugins",
+  "keywords": ["ethereum", "research", "discord", "archive"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Eth R&D Archive",
+    "shortDescription": "Search Ethereum R&D Discord discussions.",
+    "longDescription": "Search and track the Ethereum R&D Discord Archive to find protocol discussions across more than 115 channels using a local archive clone.",
+    "developerName": "ChainSafe Systems",
+    "category": "Development",
+    "capabilities": ["Research"],
+    "websiteURL": "https://github.com/ChainSafe/lodestar-claude-plugins",
+    "defaultPrompt": [
+      "Search R&D archive discussions about this topic.",
+      "Find protocol context from Discord discussions.",
+      "Check whether this issue was discussed in R&D."
+    ],
+    "brandColor": "#7C3AED"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "consensus-clients",
+  "version": "1.0.0",
+  "description": "Cross-reference Ethereum consensus client implementations - navigate codebases, compare architectures, and track activity across Lodestar, Lighthouse, Prysm, Teku, Nimbus, and Grandine",
+  "author": {
+    "name": "ChainSafe Systems"
+  },
+  "homepage": "https://github.com/ChainSafe/lodestar-claude-plugins",
+  "repository": "https://github.com/ChainSafe/lodestar-claude-plugins",
+  "keywords": ["ethereum", "consensus-clients", "lodestar", "lighthouse", "prysm", "teku", "nimbus", "grandine"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Consensus Clients",
+    "shortDescription": "Compare Ethereum consensus client implementations.",
+    "longDescription": "Cross-reference Ethereum consensus client implementations, navigate codebases, compare architectures, and track activity across Lodestar, Lighthouse, Prysm, Teku, Nimbus, and Grandine.",
+    "developerName": "ChainSafe Systems",
+    "category": "Development",
+    "capabilities": ["Research", "Development"],
+    "websiteURL": "https://github.com/ChainSafe/lodestar-claude-plugins",
+    "defaultPrompt": [
+      "Compare this Lodestar code with other clients.",
+      "Find equivalent behavior in Lighthouse and Teku.",
+      "Check how consensus clients implement this feature."
+    ],
+    "brandColor": "#059669"
+  }
+}

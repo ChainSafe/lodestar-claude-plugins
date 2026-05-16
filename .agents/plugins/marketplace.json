@@ -1,0 +1,44 @@
+{
+  "name": "lodestar-claude-plugins",
+  "interface": {
+    "displayName": "Lodestar AI Plugins"
+  },
+  "plugins": [
+    {
+      "name": "ethereum-rnd",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ethereum-rnd"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Development"
+    },
+    {
+      "name": "consensus-clients",
+      "source": {
+        "source": "local",
+        "path": "./plugins/consensus-clients"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Development"
+    },
+    {
+      "name": "eth-rnd-archive",
+      "source": {
+        "source": "local",
+        "path": "./plugins/eth-rnd-archive"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Development"
+    }
+  ]
+}

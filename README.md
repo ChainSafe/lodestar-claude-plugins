@@ -1,10 +1,12 @@
 # Lodestar Claude Plugins
 
-A Claude Code plugin marketplace for [Lodestar](https://github.com/ChainSafe/lodestar) and Ethereum consensus client development.
+A Claude Code and Codex plugin marketplace for [Lodestar](https://github.com/ChainSafe/lodestar) and Ethereum consensus client development.
 
 ## Setup
 
-### 1. Install the marketplace in Claude Code
+### Claude Code
+
+Install the marketplace in Claude Code:
 
 ```
 /plugin marketplace add ChainSafe/lodestar-claude-plugins
@@ -18,9 +20,8 @@ Then install individual plugins:
 /plugin install eth-rnd-archive@lodestar-claude-plugins
 ```
 
-### 2. Auto-configure for a project
+Auto-configure for a project by adding this to your project's `.claude/settings.json`:
 
-Add to your project's `.claude/settings.json` to auto-prompt team members:
 
 ```json
 {
@@ -40,14 +41,24 @@ Add to your project's `.claude/settings.json` to auto-prompt team members:
 }
 ```
 
+### Codex
+
+Install the marketplace in Codex:
+
+```bash
+codex plugin marketplace add ChainSafe/lodestar-claude-plugins
+```
+
+The `ethereum-rnd`, `consensus-clients`, and `eth-rnd-archive` plugins include Codex manifests and reuse the same skill definitions as Claude Code. The `zig-lsp` plugin is Claude Code only because it uses Claude-specific LSP metadata.
+
 ## Plugins
 
 | Plugin | Description |
 |--------|-------------|
-| **ethereum-rnd** | Ethereum R&D reference lookup — consensus specs, beacon/execution APIs, EIPs, research forums, protocol governance |
-| **consensus-clients** | Cross-reference CL client implementations — navigate codebases, compare architectures across 6 clients |
-| **eth-rnd-archive** | Search the Ethereum R&D Discord Archive — find protocol discussions across 115+ channels |
-| **zig-lsp** | Zig language server (ZLS) for code intelligence |
+| **ethereum-rnd** | Ethereum R&D reference lookup - consensus specs, beacon/execution APIs, EIPs, research forums, protocol governance |
+| **consensus-clients** | Cross-reference CL client implementations - navigate codebases, compare architectures across 6 clients |
+| **eth-rnd-archive** | Search the Ethereum R&D Discord Archive - find protocol discussions across 115+ channels |
+| **zig-lsp** | Zig language server (ZLS) for code intelligence. Claude Code only. |
 
 ## Structure
 
@@ -65,12 +76,14 @@ Add to your project's `.claude/settings.json` to auto-prompt team members:
 
 ### Plugin structure
 
-Each plugin follows the standard Claude Code plugin structure:
+Each plugin follows the standard Claude Code plugin structure. Portable plugins may also include `.codex-plugin/plugin.json` for Codex support.
 
 ```
 plugin-name/
 ├── .claude-plugin/
 │   └── plugin.json      # Plugin metadata (required)
+├── .codex-plugin/
+│   └── plugin.json      # Codex plugin metadata (optional)
 ├── .mcp.json            # MCP server configuration (optional)
 ├── commands/            # Slash commands (optional)
 ├── agents/              # Agent definitions (optional)
