@@ -1,0 +1,27 @@
+{
+  "name": "ethereum-rnd",
+  "version": "1.0.0",
+  "description": "Ethereum R&D reference lookup - consensus specs, beacon/execution APIs, EIPs, research forums, and protocol governance resources",
+  "author": {
+    "name": "ChainSafe Systems"
+  },
+  "homepage": "https://github.com/ChainSafe/lodestar-claude-plugins",
+  "repository": "https://github.com/ChainSafe/lodestar-claude-plugins",
+  "keywords": ["ethereum", "consensus", "beacon-chain", "research"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Ethereum R&D",
+    "shortDescription": "Ethereum protocol references and research workflows.",
+    "longDescription": "Reference lookup for Ethereum protocol development, including consensus specs, beacon and execution APIs, EIPs, research forums, and governance resources.",
+    "developerName": "ChainSafe Systems",
+    "category": "Development",
+    "capabilities": ["Research", "Development"],
+    "websiteURL": "https://github.com/ChainSafe/lodestar-claude-plugins",
+    "defaultPrompt": [
+      "Find the consensus spec reference for this code.",
+      "Compare this behavior with Ethereum protocol docs.",
+      "Look up related EIPs and research discussions."
+    ],
+    "brandColor": "#2563EB"
+  }
+}
